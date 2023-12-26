@@ -7,7 +7,7 @@
     "dev": "ts-node-dev src/server.ts",
     "postinstall": "tsc",
     "production": "node ./build/server.js",
-    "prisma:generate": " npx prisma generate",
+    "prisma generate": " npx prisma generate",
     "prisma:migrate": "prisma migrate deploy"
   },
   "devDependencies": {
