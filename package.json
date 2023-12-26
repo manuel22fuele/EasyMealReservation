@@ -7,7 +7,7 @@
     "dev": "ts-node-dev src/server.ts",
     "postinstall": "tsc",
     "production": "node build/server.js",
-    "prisma:generate": "prisma generate",
+    "prisma:generate": " npx prisma generate",
     "prisma:migrate": "prisma migrate deploy"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "zod": "^3.22.4"
   },
   "engines":{
-    "node": "18.x"
+    "node": "20.x"
 
   }
 }
