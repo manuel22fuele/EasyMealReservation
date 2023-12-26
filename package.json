@@ -5,8 +5,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "postinstall": "tsc",
-    "production": "node ./build/server.js"
+    "postinstall": "tsc prisma generate",
+    "production": "node ./build/server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
