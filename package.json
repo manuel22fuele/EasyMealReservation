@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "postinstall": "tsc",
-    "production": "node ./build/server.js",
-    "prisma generate": " npx prisma generate",
+    "production": "prisma generate && node build/server.js",
     "prisma:migrate": "prisma migrate deploy"
   },
   "devDependencies": {
