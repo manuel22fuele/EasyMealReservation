@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "postinstall": "tsc",
-    "production": "prisma generate && node build/server.js",
+    "start": "prisma generate && node build/server.js",
+    "production": "yarn start",
     "prisma:migrate": "prisma migrate deploy"
   },
   "devDependencies": {
@@ -30,8 +31,7 @@
     "prisma": "^3.9.2",
     "zod": "^3.22.4"
   },
-  "engines":{
+  "engines": {
     "node": "20.x"
-
   }
 }
