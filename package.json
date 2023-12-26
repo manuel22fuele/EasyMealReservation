@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "heroku-postbuild": "prisma generate",
+    "heroku-postbuild": "yarn prisma:generate",
     "postinstall": "tsc",
-    "start": "prisma generate && node ./build/server.js",
+    "start": "yarn prisma:generate && node ./build/server.js",
     "production": "yarn start",
+    "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate deploy"
   },
   "devDependencies": {
