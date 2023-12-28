@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "postinstall": "yarn prisma:generate && tsc",
-    "start": "node ./build/server.js",
+    "start": "prisma generate && node ./build/server.js",
     "prisma:generate": "prisma generate",
     "production": "yarn start",
     "prisma:migrate": "prisma migrate deploy"
