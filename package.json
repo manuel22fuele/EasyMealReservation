@@ -4,12 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
     "postinstall": "yarn prisma:generate && tsc",
     "start": "prisma generate && node ./build/server.js",
     "prisma:generate": "prisma generate",
     "production": "yarn start",
-    "prisma:migrate": "prisma migrate deploy"
+    "prisma:migrate": "prisma migrate deploy",
+    "dev": "ts-node-dev src/server.ts"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
