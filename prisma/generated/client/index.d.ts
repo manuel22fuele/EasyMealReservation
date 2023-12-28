@@ -370,7 +370,7 @@ export namespace Prisma {
 
   /**
    * Prisma Client JS version: 3.15.2
-   * Query Engine version: 461d6a05159055555eb7dfb337c9fb271cbd4d7e
+   * Query Engine version: 0ca5ccbcfa6bdc81c003cf549abe4269f59c41e5
    */
   export type PrismaVersion = {
     client: string
@@ -3155,8 +3155,8 @@ export namespace Prisma {
     banner?: boolean
     created_at?: boolean
     updated_at?: boolean
-    category?: boolean | CategoryArgs
     category_id?: boolean
+    category?: boolean | CategoryArgs
     items?: boolean | ItemFindManyArgs
     _count?: boolean | ProductCountOutputTypeArgs
   }
@@ -4988,10 +4988,10 @@ export namespace Prisma {
     amount?: boolean
     created_at?: boolean
     updated_at?: boolean
-    order?: boolean | OrderArgs
-    product?: boolean | ProductArgs
     order_id?: boolean
     product_id?: boolean
+    order?: boolean | OrderArgs
+    product?: boolean | ProductArgs
   }
 
   export type ItemInclude = {
@@ -5923,12 +5923,12 @@ export namespace Prisma {
     date?: boolean
     created_at?: boolean
     updated_at?: boolean
-    user?: boolean | UserArgs
-    tables?: boolean | TableArgs
-    hours?: boolean | HourArgs
     user_id?: boolean
     table_id?: boolean
     hour_id?: boolean
+    user?: boolean | UserArgs
+    tables?: boolean | TableArgs
+    hours?: boolean | HourArgs
   }
 
   export type BookInclude = {
@@ -8404,6 +8404,16 @@ export namespace Prisma {
   // Based on
   // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
+  export const TransactionIsolationLevel: {
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
+    Serializable: 'Serializable'
+  };
+
+  export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -8518,6 +8528,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   /**
    * Deep Input Types
    */
@@ -8543,13 +8561,23 @@ export namespace Prisma {
     phone?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     books?: BookOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = {
     id?: string
+    AND?: Enumerable<UserWhereInput>
+    OR?: Enumerable<UserWhereInput>
+    NOT?: Enumerable<UserWhereInput>
+    name?: StringFilter | string
+    phone?: StringFilter | string
+    email?: StringFilter | string
+    password?: StringFilter | string
+    created_at?: DateTimeNullableFilter | Date | string | null
+    updated_at?: DateTimeNullableFilter | Date | string | null
+    books?: BookListRelationFilter
   }
 
   export type UserOrderByWithAggregationInput = {
@@ -8558,8 +8586,8 @@ export namespace Prisma {
     phone?: SortOrder
     email?: SortOrder
     password?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -8592,20 +8620,27 @@ export namespace Prisma {
   export type CategoryOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     products?: ProductOrderByRelationAggregateInput
   }
 
   export type CategoryWhereUniqueInput = {
     id?: string
+    AND?: Enumerable<CategoryWhereInput>
+    OR?: Enumerable<CategoryWhereInput>
+    NOT?: Enumerable<CategoryWhereInput>
+    name?: StringFilter | string
+    created_at?: DateTimeNullableFilter | Date | string | null
+    updated_at?: DateTimeNullableFilter | Date | string | null
+    products?: ProductListRelationFilter
   }
 
   export type CategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: CategoryCountOrderByAggregateInput
     _max?: CategoryMaxOrderByAggregateInput
     _min?: CategoryMinOrderByAggregateInput
@@ -8632,8 +8667,8 @@ export namespace Prisma {
     banner?: StringFilter | string
     created_at?: DateTimeNullableFilter | Date | string | null
     updated_at?: DateTimeNullableFilter | Date | string | null
-    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
     category_id?: StringFilter | string
+    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
     items?: ItemListRelationFilter
   }
 
@@ -8643,15 +8678,27 @@ export namespace Prisma {
     price?: SortOrder
     description?: SortOrder
     banner?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    category?: CategoryOrderByWithRelationInput
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     category_id?: SortOrder
+    category?: CategoryOrderByWithRelationInput
     items?: ItemOrderByRelationAggregateInput
   }
 
   export type ProductWhereUniqueInput = {
     id?: string
+    AND?: Enumerable<ProductWhereInput>
+    OR?: Enumerable<ProductWhereInput>
+    NOT?: Enumerable<ProductWhereInput>
+    name?: StringFilter | string
+    price?: StringFilter | string
+    description?: StringFilter | string
+    banner?: StringFilter | string
+    created_at?: DateTimeNullableFilter | Date | string | null
+    updated_at?: DateTimeNullableFilter | Date | string | null
+    category_id?: StringFilter | string
+    category?: XOR<CategoryRelationFilter, CategoryWhereInput>
+    items?: ItemListRelationFilter
   }
 
   export type ProductOrderByWithAggregationInput = {
@@ -8660,8 +8707,8 @@ export namespace Prisma {
     price?: SortOrder
     description?: SortOrder
     banner?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     category_id?: SortOrder
     _count?: ProductCountOrderByAggregateInput
     _max?: ProductMaxOrderByAggregateInput
@@ -8701,14 +8748,24 @@ export namespace Prisma {
     table?: SortOrder
     status?: SortOrder
     draft?: SortOrder
-    name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    name?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     items?: ItemOrderByRelationAggregateInput
   }
 
   export type OrderWhereUniqueInput = {
     id?: string
+    AND?: Enumerable<OrderWhereInput>
+    OR?: Enumerable<OrderWhereInput>
+    NOT?: Enumerable<OrderWhereInput>
+    table?: IntFilter | number
+    status?: BoolFilter | boolean
+    draft?: BoolFilter | boolean
+    name?: StringNullableFilter | string | null
+    created_at?: DateTimeNullableFilter | Date | string | null
+    updated_at?: DateTimeNullableFilter | Date | string | null
+    items?: ItemListRelationFilter
   }
 
   export type OrderOrderByWithAggregationInput = {
@@ -8716,9 +8773,9 @@ export namespace Prisma {
     table?: SortOrder
     status?: SortOrder
     draft?: SortOrder
-    name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    name?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: OrderCountOrderByAggregateInput
     _avg?: OrderAvgOrderByAggregateInput
     _max?: OrderMaxOrderByAggregateInput
@@ -8747,32 +8804,42 @@ export namespace Prisma {
     amount?: IntFilter | number
     created_at?: DateTimeNullableFilter | Date | string | null
     updated_at?: DateTimeNullableFilter | Date | string | null
-    order?: XOR<OrderRelationFilter, OrderWhereInput>
-    product?: XOR<ProductRelationFilter, ProductWhereInput>
     order_id?: StringFilter | string
     product_id?: StringFilter | string
+    order?: XOR<OrderRelationFilter, OrderWhereInput>
+    product?: XOR<ProductRelationFilter, ProductWhereInput>
   }
 
   export type ItemOrderByWithRelationInput = {
     id?: SortOrder
     amount?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    order?: OrderOrderByWithRelationInput
-    product?: ProductOrderByWithRelationInput
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     order_id?: SortOrder
     product_id?: SortOrder
+    order?: OrderOrderByWithRelationInput
+    product?: ProductOrderByWithRelationInput
   }
 
   export type ItemWhereUniqueInput = {
     id?: string
+    AND?: Enumerable<ItemWhereInput>
+    OR?: Enumerable<ItemWhereInput>
+    NOT?: Enumerable<ItemWhereInput>
+    amount?: IntFilter | number
+    created_at?: DateTimeNullableFilter | Date | string | null
+    updated_at?: DateTimeNullableFilter | Date | string | null
+    order_id?: StringFilter | string
+    product_id?: StringFilter | string
+    order?: XOR<OrderRelationFilter, OrderWhereInput>
+    product?: XOR<ProductRelationFilter, ProductWhereInput>
   }
 
   export type ItemOrderByWithAggregationInput = {
     id?: SortOrder
     amount?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     order_id?: SortOrder
     product_id?: SortOrder
     _count?: ItemCountOrderByAggregateInput
@@ -8804,12 +8871,12 @@ export namespace Prisma {
     date?: DateTimeFilter | Date | string
     created_at?: DateTimeNullableFilter | Date | string | null
     updated_at?: DateTimeNullableFilter | Date | string | null
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    tables?: XOR<TableRelationFilter, TableWhereInput>
-    hours?: XOR<HourRelationFilter, HourWhereInput>
     user_id?: StringFilter | string
     table_id?: StringFilter | string
     hour_id?: StringFilter | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    tables?: XOR<TableRelationFilter, TableWhereInput>
+    hours?: XOR<HourRelationFilter, HourWhereInput>
   }
 
   export type BookOrderByWithRelationInput = {
@@ -8817,18 +8884,32 @@ export namespace Prisma {
     name?: SortOrder
     number_people?: SortOrder
     date?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    user?: UserOrderByWithRelationInput
-    tables?: TableOrderByWithRelationInput
-    hours?: HourOrderByWithRelationInput
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     user_id?: SortOrder
     table_id?: SortOrder
     hour_id?: SortOrder
+    user?: UserOrderByWithRelationInput
+    tables?: TableOrderByWithRelationInput
+    hours?: HourOrderByWithRelationInput
   }
 
   export type BookWhereUniqueInput = {
     id?: string
+    AND?: Enumerable<BookWhereInput>
+    OR?: Enumerable<BookWhereInput>
+    NOT?: Enumerable<BookWhereInput>
+    name?: StringFilter | string
+    number_people?: IntFilter | number
+    date?: DateTimeFilter | Date | string
+    created_at?: DateTimeNullableFilter | Date | string | null
+    updated_at?: DateTimeNullableFilter | Date | string | null
+    user_id?: StringFilter | string
+    table_id?: StringFilter | string
+    hour_id?: StringFilter | string
+    user?: XOR<UserRelationFilter, UserWhereInput>
+    tables?: XOR<TableRelationFilter, TableWhereInput>
+    hours?: XOR<HourRelationFilter, HourWhereInput>
   }
 
   export type BookOrderByWithAggregationInput = {
@@ -8836,8 +8917,8 @@ export namespace Prisma {
     name?: SortOrder
     number_people?: SortOrder
     date?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     user_id?: SortOrder
     table_id?: SortOrder
     hour_id?: SortOrder
@@ -8879,21 +8960,29 @@ export namespace Prisma {
     id?: SortOrder
     number_table?: SortOrder
     quantity_people?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     books?: BookOrderByRelationAggregateInput
   }
 
   export type TableWhereUniqueInput = {
     id?: string
+    AND?: Enumerable<TableWhereInput>
+    OR?: Enumerable<TableWhereInput>
+    NOT?: Enumerable<TableWhereInput>
+    number_table?: IntFilter | number
+    quantity_people?: IntFilter | number
+    created_at?: DateTimeNullableFilter | Date | string | null
+    updated_at?: DateTimeNullableFilter | Date | string | null
+    books?: BookListRelationFilter
   }
 
   export type TableOrderByWithAggregationInput = {
     id?: SortOrder
     number_table?: SortOrder
     quantity_people?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: TableCountOrderByAggregateInput
     _avg?: TableAvgOrderByAggregateInput
     _max?: TableMaxOrderByAggregateInput
@@ -8926,20 +9015,27 @@ export namespace Prisma {
   export type HourOrderByWithRelationInput = {
     id?: SortOrder
     hour?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     books?: BookOrderByRelationAggregateInput
   }
 
   export type HourWhereUniqueInput = {
     id?: string
+    AND?: Enumerable<HourWhereInput>
+    OR?: Enumerable<HourWhereInput>
+    NOT?: Enumerable<HourWhereInput>
+    hour?: StringFilter | string
+    created_at?: DateTimeNullableFilter | Date | string | null
+    updated_at?: DateTimeNullableFilter | Date | string | null
+    books?: BookListRelationFilter
   }
 
   export type HourOrderByWithAggregationInput = {
     id?: SortOrder
     hour?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: HourCountOrderByAggregateInput
     _max?: HourMaxOrderByAggregateInput
     _min?: HourMinOrderByAggregateInput
@@ -8985,7 +9081,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    books?: BookUpdateManyWithoutUserInput
+    books?: BookUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -8996,7 +9092,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    books?: BookUncheckedUpdateManyWithoutUserInput
+    books?: BookUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -9050,7 +9146,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    products?: ProductUpdateManyWithoutCategoryInput
+    products?: ProductUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateInput = {
@@ -9058,7 +9154,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    products?: ProductUncheckedUpdateManyWithoutCategoryInput
+    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryCreateManyInput = {
@@ -9114,8 +9210,8 @@ export namespace Prisma {
     banner?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    category?: CategoryUpdateOneRequiredWithoutProductsInput
-    items?: ItemUpdateManyWithoutProductInput
+    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
+    items?: ItemUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -9127,7 +9223,7 @@ export namespace Prisma {
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     category_id?: StringFieldUpdateOperationsInput | string
-    items?: ItemUncheckedUpdateManyWithoutProductInput
+    items?: ItemUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
@@ -9192,7 +9288,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    items?: ItemUpdateManyWithoutOrderInput
+    items?: ItemUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -9203,7 +9299,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    items?: ItemUncheckedUpdateManyWithoutOrderInput
+    items?: ItemUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderCreateManyInput = {
@@ -9259,8 +9355,8 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    order?: OrderUpdateOneRequiredWithoutItemsInput
-    product?: ProductUpdateOneRequiredWithoutItemsInput
+    order?: OrderUpdateOneRequiredWithoutItemsNestedInput
+    product?: ProductUpdateOneRequiredWithoutItemsNestedInput
   }
 
   export type ItemUncheckedUpdateInput = {
@@ -9328,9 +9424,9 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutBooksInput
-    tables?: TableUpdateOneRequiredWithoutBooksInput
-    hours?: HourUpdateOneRequiredWithoutBooksInput
+    user?: UserUpdateOneRequiredWithoutBooksNestedInput
+    tables?: TableUpdateOneRequiredWithoutBooksNestedInput
+    hours?: HourUpdateOneRequiredWithoutBooksNestedInput
   }
 
   export type BookUncheckedUpdateInput = {
@@ -9402,7 +9498,7 @@ export namespace Prisma {
     quantity_people?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    books?: BookUpdateManyWithoutTablesInput
+    books?: BookUpdateManyWithoutTablesNestedInput
   }
 
   export type TableUncheckedUpdateInput = {
@@ -9411,7 +9507,7 @@ export namespace Prisma {
     quantity_people?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    books?: BookUncheckedUpdateManyWithoutTablesInput
+    books?: BookUncheckedUpdateManyWithoutTablesNestedInput
   }
 
   export type TableCreateManyInput = {
@@ -9459,7 +9555,7 @@ export namespace Prisma {
     hour?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    books?: BookUpdateManyWithoutHoursInput
+    books?: BookUpdateManyWithoutHoursNestedInput
   }
 
   export type HourUncheckedUpdateInput = {
@@ -9467,7 +9563,7 @@ export namespace Prisma {
     hour?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    books?: BookUncheckedUpdateManyWithoutHoursInput
+    books?: BookUncheckedUpdateManyWithoutHoursNestedInput
   }
 
   export type HourCreateManyInput = {
@@ -9492,28 +9588,28 @@ export namespace Prisma {
   }
 
   export type StringFilter = {
-    equals?: string
-    in?: Enumerable<string>
-    notIn?: Enumerable<string>
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
+    equals?: string | StringFieldRefInput
+    in?: Enumerable<string> | ListStringFieldRefInput
+    notIn?: Enumerable<string> | ListStringFieldRefInput
+    lt?: string | StringFieldRefInput
+    lte?: string | StringFieldRefInput
+    gt?: string | StringFieldRefInput
+    gte?: string | StringFieldRefInput
+    contains?: string | StringFieldRefInput
+    startsWith?: string | StringFieldRefInput
+    endsWith?: string | StringFieldRefInput
     mode?: QueryMode
     not?: NestedStringFilter | string
   }
 
   export type DateTimeNullableFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | null
-    notIn?: Enumerable<Date> | Enumerable<string> | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
+    equals?: Date | string | DateTimeFieldRefInput | null
+    in?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput | null
+    notIn?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput | null
+    lt?: Date | string | DateTimeFieldRefInput
+    lte?: Date | string | DateTimeFieldRefInput
+    gt?: Date | string | DateTimeFieldRefInput
+    gte?: Date | string | DateTimeFieldRefInput
     not?: NestedDateTimeNullableFilter | Date | string | null
   }
 
@@ -9521,6 +9617,11 @@ export namespace Prisma {
     every?: BookWhereInput
     some?: BookWhereInput
     none?: BookWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type BookOrderByRelationAggregateInput = {
@@ -9558,16 +9659,16 @@ export namespace Prisma {
   }
 
   export type StringWithAggregatesFilter = {
-    equals?: string
-    in?: Enumerable<string>
-    notIn?: Enumerable<string>
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
+    equals?: string | StringFieldRefInput
+    in?: Enumerable<string> | ListStringFieldRefInput
+    notIn?: Enumerable<string> | ListStringFieldRefInput
+    lt?: string | StringFieldRefInput
+    lte?: string | StringFieldRefInput
+    gt?: string | StringFieldRefInput
+    gte?: string | StringFieldRefInput
+    contains?: string | StringFieldRefInput
+    startsWith?: string | StringFieldRefInput
+    endsWith?: string | StringFieldRefInput
     mode?: QueryMode
     not?: NestedStringWithAggregatesFilter | string
     _count?: NestedIntFilter
@@ -9576,13 +9677,13 @@ export namespace Prisma {
   }
 
   export type DateTimeNullableWithAggregatesFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | null
-    notIn?: Enumerable<Date> | Enumerable<string> | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
+    equals?: Date | string | DateTimeFieldRefInput | null
+    in?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput | null
+    notIn?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput | null
+    lt?: Date | string | DateTimeFieldRefInput
+    lte?: Date | string | DateTimeFieldRefInput
+    gt?: Date | string | DateTimeFieldRefInput
+    gte?: Date | string | DateTimeFieldRefInput
     not?: NestedDateTimeNullableWithAggregatesFilter | Date | string | null
     _count?: NestedIntNullableFilter
     _min?: NestedDateTimeNullableFilter
@@ -9669,32 +9770,32 @@ export namespace Prisma {
   }
 
   export type IntFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
+    equals?: number | IntFieldRefInput
+    in?: Enumerable<number> | ListIntFieldRefInput
+    notIn?: Enumerable<number> | ListIntFieldRefInput
+    lt?: number | IntFieldRefInput
+    lte?: number | IntFieldRefInput
+    gt?: number | IntFieldRefInput
+    gte?: number | IntFieldRefInput
     not?: NestedIntFilter | number
   }
 
   export type BoolFilter = {
-    equals?: boolean
+    equals?: boolean | BooleanFieldRefInput
     not?: NestedBoolFilter | boolean
   }
 
   export type StringNullableFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
+    equals?: string | StringFieldRefInput | null
+    in?: Enumerable<string> | ListStringFieldRefInput | null
+    notIn?: Enumerable<string> | ListStringFieldRefInput | null
+    lt?: string | StringFieldRefInput
+    lte?: string | StringFieldRefInput
+    gt?: string | StringFieldRefInput
+    gte?: string | StringFieldRefInput
+    contains?: string | StringFieldRefInput
+    startsWith?: string | StringFieldRefInput
+    endsWith?: string | StringFieldRefInput
     mode?: QueryMode
     not?: NestedStringNullableFilter | string | null
   }
@@ -9738,13 +9839,13 @@ export namespace Prisma {
   }
 
   export type IntWithAggregatesFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
+    equals?: number | IntFieldRefInput
+    in?: Enumerable<number> | ListIntFieldRefInput
+    notIn?: Enumerable<number> | ListIntFieldRefInput
+    lt?: number | IntFieldRefInput
+    lte?: number | IntFieldRefInput
+    gt?: number | IntFieldRefInput
+    gte?: number | IntFieldRefInput
     not?: NestedIntWithAggregatesFilter | number
     _count?: NestedIntFilter
     _avg?: NestedFloatFilter
@@ -9754,7 +9855,7 @@ export namespace Prisma {
   }
 
   export type BoolWithAggregatesFilter = {
-    equals?: boolean
+    equals?: boolean | BooleanFieldRefInput
     not?: NestedBoolWithAggregatesFilter | boolean
     _count?: NestedIntFilter
     _min?: NestedBoolFilter
@@ -9762,16 +9863,16 @@ export namespace Prisma {
   }
 
   export type StringNullableWithAggregatesFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
+    equals?: string | StringFieldRefInput | null
+    in?: Enumerable<string> | ListStringFieldRefInput | null
+    notIn?: Enumerable<string> | ListStringFieldRefInput | null
+    lt?: string | StringFieldRefInput
+    lte?: string | StringFieldRefInput
+    gt?: string | StringFieldRefInput
+    gte?: string | StringFieldRefInput
+    contains?: string | StringFieldRefInput
+    startsWith?: string | StringFieldRefInput
+    endsWith?: string | StringFieldRefInput
     mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
@@ -9825,13 +9926,13 @@ export namespace Prisma {
   }
 
   export type DateTimeFilter = {
-    equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string>
-    notIn?: Enumerable<Date> | Enumerable<string>
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
+    equals?: Date | string | DateTimeFieldRefInput
+    in?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput
+    notIn?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput
+    lt?: Date | string | DateTimeFieldRefInput
+    lte?: Date | string | DateTimeFieldRefInput
+    gt?: Date | string | DateTimeFieldRefInput
+    gte?: Date | string | DateTimeFieldRefInput
     not?: NestedDateTimeFilter | Date | string
   }
 
@@ -9895,13 +9996,13 @@ export namespace Prisma {
   }
 
   export type DateTimeWithAggregatesFilter = {
-    equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string>
-    notIn?: Enumerable<Date> | Enumerable<string>
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
+    equals?: Date | string | DateTimeFieldRefInput
+    in?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput
+    notIn?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput
+    lt?: Date | string | DateTimeFieldRefInput
+    lte?: Date | string | DateTimeFieldRefInput
+    gt?: Date | string | DateTimeFieldRefInput
+    gte?: Date | string | DateTimeFieldRefInput
     not?: NestedDateTimeWithAggregatesFilter | Date | string
     _count?: NestedIntFilter
     _min?: NestedDateTimeFilter
@@ -9985,7 +10086,7 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type BookUpdateManyWithoutUserInput = {
+  export type BookUpdateManyWithoutUserNestedInput = {
     create?: XOR<Enumerable<BookCreateWithoutUserInput>, Enumerable<BookUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<BookCreateOrConnectWithoutUserInput>
     upsert?: Enumerable<BookUpsertWithWhereUniqueWithoutUserInput>
@@ -9999,7 +10100,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<BookScalarWhereInput>
   }
 
-  export type BookUncheckedUpdateManyWithoutUserInput = {
+  export type BookUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<Enumerable<BookCreateWithoutUserInput>, Enumerable<BookUncheckedCreateWithoutUserInput>>
     connectOrCreate?: Enumerable<BookCreateOrConnectWithoutUserInput>
     upsert?: Enumerable<BookUpsertWithWhereUniqueWithoutUserInput>
@@ -10027,7 +10128,7 @@ export namespace Prisma {
     connect?: Enumerable<ProductWhereUniqueInput>
   }
 
-  export type ProductUpdateManyWithoutCategoryInput = {
+  export type ProductUpdateManyWithoutCategoryNestedInput = {
     create?: XOR<Enumerable<ProductCreateWithoutCategoryInput>, Enumerable<ProductUncheckedCreateWithoutCategoryInput>>
     connectOrCreate?: Enumerable<ProductCreateOrConnectWithoutCategoryInput>
     upsert?: Enumerable<ProductUpsertWithWhereUniqueWithoutCategoryInput>
@@ -10041,7 +10142,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<ProductScalarWhereInput>
   }
 
-  export type ProductUncheckedUpdateManyWithoutCategoryInput = {
+  export type ProductUncheckedUpdateManyWithoutCategoryNestedInput = {
     create?: XOR<Enumerable<ProductCreateWithoutCategoryInput>, Enumerable<ProductUncheckedCreateWithoutCategoryInput>>
     connectOrCreate?: Enumerable<ProductCreateOrConnectWithoutCategoryInput>
     upsert?: Enumerable<ProductUpsertWithWhereUniqueWithoutCategoryInput>
@@ -10075,15 +10176,15 @@ export namespace Prisma {
     connect?: Enumerable<ItemWhereUniqueInput>
   }
 
-  export type CategoryUpdateOneRequiredWithoutProductsInput = {
+  export type CategoryUpdateOneRequiredWithoutProductsNestedInput = {
     create?: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutProductsInput
     upsert?: CategoryUpsertWithoutProductsInput
     connect?: CategoryWhereUniqueInput
-    update?: XOR<CategoryUpdateWithoutProductsInput, CategoryUncheckedUpdateWithoutProductsInput>
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutProductsInput, CategoryUpdateWithoutProductsInput>, CategoryUncheckedUpdateWithoutProductsInput>
   }
 
-  export type ItemUpdateManyWithoutProductInput = {
+  export type ItemUpdateManyWithoutProductNestedInput = {
     create?: XOR<Enumerable<ItemCreateWithoutProductInput>, Enumerable<ItemUncheckedCreateWithoutProductInput>>
     connectOrCreate?: Enumerable<ItemCreateOrConnectWithoutProductInput>
     upsert?: Enumerable<ItemUpsertWithWhereUniqueWithoutProductInput>
@@ -10097,7 +10198,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<ItemScalarWhereInput>
   }
 
-  export type ItemUncheckedUpdateManyWithoutProductInput = {
+  export type ItemUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<Enumerable<ItemCreateWithoutProductInput>, Enumerable<ItemUncheckedCreateWithoutProductInput>>
     connectOrCreate?: Enumerable<ItemCreateOrConnectWithoutProductInput>
     upsert?: Enumerable<ItemUpsertWithWhereUniqueWithoutProductInput>
@@ -10141,7 +10242,7 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type ItemUpdateManyWithoutOrderInput = {
+  export type ItemUpdateManyWithoutOrderNestedInput = {
     create?: XOR<Enumerable<ItemCreateWithoutOrderInput>, Enumerable<ItemUncheckedCreateWithoutOrderInput>>
     connectOrCreate?: Enumerable<ItemCreateOrConnectWithoutOrderInput>
     upsert?: Enumerable<ItemUpsertWithWhereUniqueWithoutOrderInput>
@@ -10155,7 +10256,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<ItemScalarWhereInput>
   }
 
-  export type ItemUncheckedUpdateManyWithoutOrderInput = {
+  export type ItemUncheckedUpdateManyWithoutOrderNestedInput = {
     create?: XOR<Enumerable<ItemCreateWithoutOrderInput>, Enumerable<ItemUncheckedCreateWithoutOrderInput>>
     connectOrCreate?: Enumerable<ItemCreateOrConnectWithoutOrderInput>
     upsert?: Enumerable<ItemUpsertWithWhereUniqueWithoutOrderInput>
@@ -10181,20 +10282,20 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput
   }
 
-  export type OrderUpdateOneRequiredWithoutItemsInput = {
+  export type OrderUpdateOneRequiredWithoutItemsNestedInput = {
     create?: XOR<OrderCreateWithoutItemsInput, OrderUncheckedCreateWithoutItemsInput>
     connectOrCreate?: OrderCreateOrConnectWithoutItemsInput
     upsert?: OrderUpsertWithoutItemsInput
     connect?: OrderWhereUniqueInput
-    update?: XOR<OrderUpdateWithoutItemsInput, OrderUncheckedUpdateWithoutItemsInput>
+    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutItemsInput, OrderUpdateWithoutItemsInput>, OrderUncheckedUpdateWithoutItemsInput>
   }
 
-  export type ProductUpdateOneRequiredWithoutItemsInput = {
+  export type ProductUpdateOneRequiredWithoutItemsNestedInput = {
     create?: XOR<ProductCreateWithoutItemsInput, ProductUncheckedCreateWithoutItemsInput>
     connectOrCreate?: ProductCreateOrConnectWithoutItemsInput
     upsert?: ProductUpsertWithoutItemsInput
     connect?: ProductWhereUniqueInput
-    update?: XOR<ProductUpdateWithoutItemsInput, ProductUncheckedUpdateWithoutItemsInput>
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutItemsInput, ProductUpdateWithoutItemsInput>, ProductUncheckedUpdateWithoutItemsInput>
   }
 
   export type UserCreateNestedOneWithoutBooksInput = {
@@ -10219,28 +10320,28 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type UserUpdateOneRequiredWithoutBooksInput = {
+  export type UserUpdateOneRequiredWithoutBooksNestedInput = {
     create?: XOR<UserCreateWithoutBooksInput, UserUncheckedCreateWithoutBooksInput>
     connectOrCreate?: UserCreateOrConnectWithoutBooksInput
     upsert?: UserUpsertWithoutBooksInput
     connect?: UserWhereUniqueInput
-    update?: XOR<UserUpdateWithoutBooksInput, UserUncheckedUpdateWithoutBooksInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBooksInput, UserUpdateWithoutBooksInput>, UserUncheckedUpdateWithoutBooksInput>
   }
 
-  export type TableUpdateOneRequiredWithoutBooksInput = {
+  export type TableUpdateOneRequiredWithoutBooksNestedInput = {
     create?: XOR<TableCreateWithoutBooksInput, TableUncheckedCreateWithoutBooksInput>
     connectOrCreate?: TableCreateOrConnectWithoutBooksInput
     upsert?: TableUpsertWithoutBooksInput
     connect?: TableWhereUniqueInput
-    update?: XOR<TableUpdateWithoutBooksInput, TableUncheckedUpdateWithoutBooksInput>
+    update?: XOR<XOR<TableUpdateToOneWithWhereWithoutBooksInput, TableUpdateWithoutBooksInput>, TableUncheckedUpdateWithoutBooksInput>
   }
 
-  export type HourUpdateOneRequiredWithoutBooksInput = {
+  export type HourUpdateOneRequiredWithoutBooksNestedInput = {
     create?: XOR<HourCreateWithoutBooksInput, HourUncheckedCreateWithoutBooksInput>
     connectOrCreate?: HourCreateOrConnectWithoutBooksInput
     upsert?: HourUpsertWithoutBooksInput
     connect?: HourWhereUniqueInput
-    update?: XOR<HourUpdateWithoutBooksInput, HourUncheckedUpdateWithoutBooksInput>
+    update?: XOR<XOR<HourUpdateToOneWithWhereWithoutBooksInput, HourUpdateWithoutBooksInput>, HourUncheckedUpdateWithoutBooksInput>
   }
 
   export type BookCreateNestedManyWithoutTablesInput = {
@@ -10257,7 +10358,7 @@ export namespace Prisma {
     connect?: Enumerable<BookWhereUniqueInput>
   }
 
-  export type BookUpdateManyWithoutTablesInput = {
+  export type BookUpdateManyWithoutTablesNestedInput = {
     create?: XOR<Enumerable<BookCreateWithoutTablesInput>, Enumerable<BookUncheckedCreateWithoutTablesInput>>
     connectOrCreate?: Enumerable<BookCreateOrConnectWithoutTablesInput>
     upsert?: Enumerable<BookUpsertWithWhereUniqueWithoutTablesInput>
@@ -10271,7 +10372,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<BookScalarWhereInput>
   }
 
-  export type BookUncheckedUpdateManyWithoutTablesInput = {
+  export type BookUncheckedUpdateManyWithoutTablesNestedInput = {
     create?: XOR<Enumerable<BookCreateWithoutTablesInput>, Enumerable<BookUncheckedCreateWithoutTablesInput>>
     connectOrCreate?: Enumerable<BookCreateOrConnectWithoutTablesInput>
     upsert?: Enumerable<BookUpsertWithWhereUniqueWithoutTablesInput>
@@ -10299,7 +10400,7 @@ export namespace Prisma {
     connect?: Enumerable<BookWhereUniqueInput>
   }
 
-  export type BookUpdateManyWithoutHoursInput = {
+  export type BookUpdateManyWithoutHoursNestedInput = {
     create?: XOR<Enumerable<BookCreateWithoutHoursInput>, Enumerable<BookUncheckedCreateWithoutHoursInput>>
     connectOrCreate?: Enumerable<BookCreateOrConnectWithoutHoursInput>
     upsert?: Enumerable<BookUpsertWithWhereUniqueWithoutHoursInput>
@@ -10313,7 +10414,7 @@ export namespace Prisma {
     deleteMany?: Enumerable<BookScalarWhereInput>
   }
 
-  export type BookUncheckedUpdateManyWithoutHoursInput = {
+  export type BookUncheckedUpdateManyWithoutHoursNestedInput = {
     create?: XOR<Enumerable<BookCreateWithoutHoursInput>, Enumerable<BookUncheckedCreateWithoutHoursInput>>
     connectOrCreate?: Enumerable<BookCreateOrConnectWithoutHoursInput>
     upsert?: Enumerable<BookUpsertWithWhereUniqueWithoutHoursInput>
@@ -10328,41 +10429,41 @@ export namespace Prisma {
   }
 
   export type NestedStringFilter = {
-    equals?: string
-    in?: Enumerable<string>
-    notIn?: Enumerable<string>
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
+    equals?: string | StringFieldRefInput
+    in?: Enumerable<string> | ListStringFieldRefInput
+    notIn?: Enumerable<string> | ListStringFieldRefInput
+    lt?: string | StringFieldRefInput
+    lte?: string | StringFieldRefInput
+    gt?: string | StringFieldRefInput
+    gte?: string | StringFieldRefInput
+    contains?: string | StringFieldRefInput
+    startsWith?: string | StringFieldRefInput
+    endsWith?: string | StringFieldRefInput
     not?: NestedStringFilter | string
   }
 
   export type NestedDateTimeNullableFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | null
-    notIn?: Enumerable<Date> | Enumerable<string> | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
+    equals?: Date | string | DateTimeFieldRefInput | null
+    in?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput | null
+    notIn?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput | null
+    lt?: Date | string | DateTimeFieldRefInput
+    lte?: Date | string | DateTimeFieldRefInput
+    gt?: Date | string | DateTimeFieldRefInput
+    gte?: Date | string | DateTimeFieldRefInput
     not?: NestedDateTimeNullableFilter | Date | string | null
   }
 
   export type NestedStringWithAggregatesFilter = {
-    equals?: string
-    in?: Enumerable<string>
-    notIn?: Enumerable<string>
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
+    equals?: string | StringFieldRefInput
+    in?: Enumerable<string> | ListStringFieldRefInput
+    notIn?: Enumerable<string> | ListStringFieldRefInput
+    lt?: string | StringFieldRefInput
+    lte?: string | StringFieldRefInput
+    gt?: string | StringFieldRefInput
+    gte?: string | StringFieldRefInput
+    contains?: string | StringFieldRefInput
+    startsWith?: string | StringFieldRefInput
+    endsWith?: string | StringFieldRefInput
     not?: NestedStringWithAggregatesFilter | string
     _count?: NestedIntFilter
     _min?: NestedStringFilter
@@ -10370,24 +10471,24 @@ export namespace Prisma {
   }
 
   export type NestedIntFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
+    equals?: number | IntFieldRefInput
+    in?: Enumerable<number> | ListIntFieldRefInput
+    notIn?: Enumerable<number> | ListIntFieldRefInput
+    lt?: number | IntFieldRefInput
+    lte?: number | IntFieldRefInput
+    gt?: number | IntFieldRefInput
+    gte?: number | IntFieldRefInput
     not?: NestedIntFilter | number
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter = {
-    equals?: Date | string | null
-    in?: Enumerable<Date> | Enumerable<string> | null
-    notIn?: Enumerable<Date> | Enumerable<string> | null
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
+    equals?: Date | string | DateTimeFieldRefInput | null
+    in?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput | null
+    notIn?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput | null
+    lt?: Date | string | DateTimeFieldRefInput
+    lte?: Date | string | DateTimeFieldRefInput
+    gt?: Date | string | DateTimeFieldRefInput
+    gte?: Date | string | DateTimeFieldRefInput
     not?: NestedDateTimeNullableWithAggregatesFilter | Date | string | null
     _count?: NestedIntNullableFilter
     _min?: NestedDateTimeNullableFilter
@@ -10395,43 +10496,43 @@ export namespace Prisma {
   }
 
   export type NestedIntNullableFilter = {
-    equals?: number | null
-    in?: Enumerable<number> | null
-    notIn?: Enumerable<number> | null
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
+    equals?: number | IntFieldRefInput | null
+    in?: Enumerable<number> | ListIntFieldRefInput | null
+    notIn?: Enumerable<number> | ListIntFieldRefInput | null
+    lt?: number | IntFieldRefInput
+    lte?: number | IntFieldRefInput
+    gt?: number | IntFieldRefInput
+    gte?: number | IntFieldRefInput
     not?: NestedIntNullableFilter | number | null
   }
 
   export type NestedBoolFilter = {
-    equals?: boolean
+    equals?: boolean | BooleanFieldRefInput
     not?: NestedBoolFilter | boolean
   }
 
   export type NestedStringNullableFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
+    equals?: string | StringFieldRefInput | null
+    in?: Enumerable<string> | ListStringFieldRefInput | null
+    notIn?: Enumerable<string> | ListStringFieldRefInput | null
+    lt?: string | StringFieldRefInput
+    lte?: string | StringFieldRefInput
+    gt?: string | StringFieldRefInput
+    gte?: string | StringFieldRefInput
+    contains?: string | StringFieldRefInput
+    startsWith?: string | StringFieldRefInput
+    endsWith?: string | StringFieldRefInput
     not?: NestedStringNullableFilter | string | null
   }
 
   export type NestedIntWithAggregatesFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
+    equals?: number | IntFieldRefInput
+    in?: Enumerable<number> | ListIntFieldRefInput
+    notIn?: Enumerable<number> | ListIntFieldRefInput
+    lt?: number | IntFieldRefInput
+    lte?: number | IntFieldRefInput
+    gt?: number | IntFieldRefInput
+    gte?: number | IntFieldRefInput
     not?: NestedIntWithAggregatesFilter | number
     _count?: NestedIntFilter
     _avg?: NestedFloatFilter
@@ -10441,18 +10542,18 @@ export namespace Prisma {
   }
 
   export type NestedFloatFilter = {
-    equals?: number
-    in?: Enumerable<number>
-    notIn?: Enumerable<number>
-    lt?: number
-    lte?: number
-    gt?: number
-    gte?: number
+    equals?: number | FloatFieldRefInput
+    in?: Enumerable<number> | ListFloatFieldRefInput
+    notIn?: Enumerable<number> | ListFloatFieldRefInput
+    lt?: number | FloatFieldRefInput
+    lte?: number | FloatFieldRefInput
+    gt?: number | FloatFieldRefInput
+    gte?: number | FloatFieldRefInput
     not?: NestedFloatFilter | number
   }
 
   export type NestedBoolWithAggregatesFilter = {
-    equals?: boolean
+    equals?: boolean | BooleanFieldRefInput
     not?: NestedBoolWithAggregatesFilter | boolean
     _count?: NestedIntFilter
     _min?: NestedBoolFilter
@@ -10460,16 +10561,16 @@ export namespace Prisma {
   }
 
   export type NestedStringNullableWithAggregatesFilter = {
-    equals?: string | null
-    in?: Enumerable<string> | null
-    notIn?: Enumerable<string> | null
-    lt?: string
-    lte?: string
-    gt?: string
-    gte?: string
-    contains?: string
-    startsWith?: string
-    endsWith?: string
+    equals?: string | StringFieldRefInput | null
+    in?: Enumerable<string> | ListStringFieldRefInput | null
+    notIn?: Enumerable<string> | ListStringFieldRefInput | null
+    lt?: string | StringFieldRefInput
+    lte?: string | StringFieldRefInput
+    gt?: string | StringFieldRefInput
+    gte?: string | StringFieldRefInput
+    contains?: string | StringFieldRefInput
+    startsWith?: string | StringFieldRefInput
+    endsWith?: string | StringFieldRefInput
     not?: NestedStringNullableWithAggregatesFilter | string | null
     _count?: NestedIntNullableFilter
     _min?: NestedStringNullableFilter
@@ -10477,24 +10578,24 @@ export namespace Prisma {
   }
 
   export type NestedDateTimeFilter = {
-    equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string>
-    notIn?: Enumerable<Date> | Enumerable<string>
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
+    equals?: Date | string | DateTimeFieldRefInput
+    in?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput
+    notIn?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput
+    lt?: Date | string | DateTimeFieldRefInput
+    lte?: Date | string | DateTimeFieldRefInput
+    gt?: Date | string | DateTimeFieldRefInput
+    gte?: Date | string | DateTimeFieldRefInput
     not?: NestedDateTimeFilter | Date | string
   }
 
   export type NestedDateTimeWithAggregatesFilter = {
-    equals?: Date | string
-    in?: Enumerable<Date> | Enumerable<string>
-    notIn?: Enumerable<Date> | Enumerable<string>
-    lt?: Date | string
-    lte?: Date | string
-    gt?: Date | string
-    gte?: Date | string
+    equals?: Date | string | DateTimeFieldRefInput
+    in?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput
+    notIn?: Enumerable<Date> | Enumerable<string> | ListDateTimeFieldRefInput
+    lt?: Date | string | DateTimeFieldRefInput
+    lte?: Date | string | DateTimeFieldRefInput
+    gt?: Date | string | DateTimeFieldRefInput
+    gte?: Date | string | DateTimeFieldRefInput
     not?: NestedDateTimeWithAggregatesFilter | Date | string
     _count?: NestedIntFilter
     _min?: NestedDateTimeFilter
@@ -10546,7 +10647,7 @@ export namespace Prisma {
 
   export type BookUpdateManyWithWhereWithoutUserInput = {
     where: BookScalarWhereInput
-    data: XOR<BookUpdateManyMutationInput, BookUncheckedUpdateManyWithoutBooksInput>
+    data: XOR<BookUpdateManyMutationInput, BookUncheckedUpdateManyWithoutUserInput>
   }
 
   export type BookScalarWhereInput = {
@@ -10609,7 +10710,7 @@ export namespace Prisma {
 
   export type ProductUpdateManyWithWhereWithoutCategoryInput = {
     where: ProductScalarWhereInput
-    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutProductsInput>
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutCategoryInput>
   }
 
   export type ProductScalarWhereInput = {
@@ -10674,6 +10775,12 @@ export namespace Prisma {
   export type CategoryUpsertWithoutProductsInput = {
     update: XOR<CategoryUpdateWithoutProductsInput, CategoryUncheckedUpdateWithoutProductsInput>
     create: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutProductsInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutProductsInput, CategoryUncheckedUpdateWithoutProductsInput>
   }
 
   export type CategoryUpdateWithoutProductsInput = {
@@ -10703,7 +10810,7 @@ export namespace Prisma {
 
   export type ItemUpdateManyWithWhereWithoutProductInput = {
     where: ItemScalarWhereInput
-    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutItemsInput>
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutProductInput>
   }
 
   export type ItemScalarWhereInput = {
@@ -10757,7 +10864,7 @@ export namespace Prisma {
 
   export type ItemUpdateManyWithWhereWithoutOrderInput = {
     where: ItemScalarWhereInput
-    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutItemsInput>
+    data: XOR<ItemUpdateManyMutationInput, ItemUncheckedUpdateManyWithoutOrderInput>
   }
 
   export type OrderCreateWithoutItemsInput = {
@@ -10815,6 +10922,12 @@ export namespace Prisma {
   export type OrderUpsertWithoutItemsInput = {
     update: XOR<OrderUpdateWithoutItemsInput, OrderUncheckedUpdateWithoutItemsInput>
     create: XOR<OrderCreateWithoutItemsInput, OrderUncheckedCreateWithoutItemsInput>
+    where?: OrderWhereInput
+  }
+
+  export type OrderUpdateToOneWithWhereWithoutItemsInput = {
+    where?: OrderWhereInput
+    data: XOR<OrderUpdateWithoutItemsInput, OrderUncheckedUpdateWithoutItemsInput>
   }
 
   export type OrderUpdateWithoutItemsInput = {
@@ -10840,6 +10953,12 @@ export namespace Prisma {
   export type ProductUpsertWithoutItemsInput = {
     update: XOR<ProductUpdateWithoutItemsInput, ProductUncheckedUpdateWithoutItemsInput>
     create: XOR<ProductCreateWithoutItemsInput, ProductUncheckedCreateWithoutItemsInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutItemsInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutItemsInput, ProductUncheckedUpdateWithoutItemsInput>
   }
 
   export type ProductUpdateWithoutItemsInput = {
@@ -10850,7 +10969,7 @@ export namespace Prisma {
     banner?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    category?: CategoryUpdateOneRequiredWithoutProductsInput
+    category?: CategoryUpdateOneRequiredWithoutProductsNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutItemsInput = {
@@ -10932,6 +11051,12 @@ export namespace Prisma {
   export type UserUpsertWithoutBooksInput = {
     update: XOR<UserUpdateWithoutBooksInput, UserUncheckedUpdateWithoutBooksInput>
     create: XOR<UserCreateWithoutBooksInput, UserUncheckedCreateWithoutBooksInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBooksInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBooksInput, UserUncheckedUpdateWithoutBooksInput>
   }
 
   export type UserUpdateWithoutBooksInput = {
@@ -10957,6 +11082,12 @@ export namespace Prisma {
   export type TableUpsertWithoutBooksInput = {
     update: XOR<TableUpdateWithoutBooksInput, TableUncheckedUpdateWithoutBooksInput>
     create: XOR<TableCreateWithoutBooksInput, TableUncheckedCreateWithoutBooksInput>
+    where?: TableWhereInput
+  }
+
+  export type TableUpdateToOneWithWhereWithoutBooksInput = {
+    where?: TableWhereInput
+    data: XOR<TableUpdateWithoutBooksInput, TableUncheckedUpdateWithoutBooksInput>
   }
 
   export type TableUpdateWithoutBooksInput = {
@@ -10978,6 +11109,12 @@ export namespace Prisma {
   export type HourUpsertWithoutBooksInput = {
     update: XOR<HourUpdateWithoutBooksInput, HourUncheckedUpdateWithoutBooksInput>
     create: XOR<HourCreateWithoutBooksInput, HourUncheckedCreateWithoutBooksInput>
+    where?: HourWhereInput
+  }
+
+  export type HourUpdateToOneWithWhereWithoutBooksInput = {
+    where?: HourWhereInput
+    data: XOR<HourUpdateWithoutBooksInput, HourUncheckedUpdateWithoutBooksInput>
   }
 
   export type HourUpdateWithoutBooksInput = {
@@ -11039,7 +11176,7 @@ export namespace Prisma {
 
   export type BookUpdateManyWithWhereWithoutTablesInput = {
     where: BookScalarWhereInput
-    data: XOR<BookUpdateManyMutationInput, BookUncheckedUpdateManyWithoutBooksInput>
+    data: XOR<BookUpdateManyMutationInput, BookUncheckedUpdateManyWithoutTablesInput>
   }
 
   export type BookCreateWithoutHoursInput = {
@@ -11087,7 +11224,7 @@ export namespace Prisma {
 
   export type BookUpdateManyWithWhereWithoutHoursInput = {
     where: BookScalarWhereInput
-    data: XOR<BookUpdateManyMutationInput, BookUncheckedUpdateManyWithoutBooksInput>
+    data: XOR<BookUpdateManyMutationInput, BookUncheckedUpdateManyWithoutHoursInput>
   }
 
   export type BookCreateManyUserInput = {
@@ -11108,8 +11245,8 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tables?: TableUpdateOneRequiredWithoutBooksInput
-    hours?: HourUpdateOneRequiredWithoutBooksInput
+    tables?: TableUpdateOneRequiredWithoutBooksNestedInput
+    hours?: HourUpdateOneRequiredWithoutBooksNestedInput
   }
 
   export type BookUncheckedUpdateWithoutUserInput = {
@@ -11123,7 +11260,7 @@ export namespace Prisma {
     hour_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type BookUncheckedUpdateManyWithoutBooksInput = {
+  export type BookUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     number_people?: IntFieldUpdateOperationsInput | number
@@ -11152,7 +11289,7 @@ export namespace Prisma {
     banner?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    items?: ItemUpdateManyWithoutProductInput
+    items?: ItemUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -11163,10 +11300,10 @@ export namespace Prisma {
     banner?: StringFieldUpdateOperationsInput | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    items?: ItemUncheckedUpdateManyWithoutProductInput
+    items?: ItemUncheckedUpdateManyWithoutProductNestedInput
   }
 
-  export type ProductUncheckedUpdateManyWithoutProductsInput = {
+  export type ProductUncheckedUpdateManyWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     price?: StringFieldUpdateOperationsInput | string
@@ -11189,7 +11326,7 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    order?: OrderUpdateOneRequiredWithoutItemsInput
+    order?: OrderUpdateOneRequiredWithoutItemsNestedInput
   }
 
   export type ItemUncheckedUpdateWithoutProductInput = {
@@ -11200,7 +11337,7 @@ export namespace Prisma {
     order_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type ItemUncheckedUpdateManyWithoutItemsInput = {
+  export type ItemUncheckedUpdateManyWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11221,10 +11358,18 @@ export namespace Prisma {
     amount?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    product?: ProductUpdateOneRequiredWithoutItemsInput
+    product?: ProductUpdateOneRequiredWithoutItemsNestedInput
   }
 
   export type ItemUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    product_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ItemUncheckedUpdateManyWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11250,11 +11395,22 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutBooksInput
-    hours?: HourUpdateOneRequiredWithoutBooksInput
+    user?: UserUpdateOneRequiredWithoutBooksNestedInput
+    hours?: HourUpdateOneRequiredWithoutBooksNestedInput
   }
 
   export type BookUncheckedUpdateWithoutTablesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number_people?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    hour_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BookUncheckedUpdateManyWithoutTablesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     number_people?: IntFieldUpdateOperationsInput | number
@@ -11283,11 +11439,22 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutBooksInput
-    tables?: TableUpdateOneRequiredWithoutBooksInput
+    user?: UserUpdateOneRequiredWithoutBooksNestedInput
+    tables?: TableUpdateOneRequiredWithoutBooksNestedInput
   }
 
   export type BookUncheckedUpdateWithoutHoursInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    number_people?: IntFieldUpdateOperationsInput | number
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    table_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BookUncheckedUpdateManyWithoutHoursInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     number_people?: IntFieldUpdateOperationsInput | number

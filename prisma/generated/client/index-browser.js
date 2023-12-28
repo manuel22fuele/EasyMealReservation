@@ -12,11 +12,11 @@ exports.Prisma = Prisma
 
 /**
  * Prisma Client JS version: 3.15.2
- * Query Engine version: 461d6a05159055555eb7dfb337c9fb271cbd4d7e
+ * Query Engine version: 0ca5ccbcfa6bdc81c003cf549abe4269f59c41e5
  */
 Prisma.prismaVersion = {
   client: "3.15.2",
-  engine: "461d6a05159055555eb7dfb337c9fb271cbd4d7e"
+  engine: "0ca5ccbcfa6bdc81c003cf549abe4269f59c41e5"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -75,6 +75,13 @@ Prisma.AnyNull = 'AnyNull'
 // Based on
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 function makeEnum(x) { return x; }
+
+exports.Prisma.TransactionIsolationLevel = makeEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
+  Serializable: 'Serializable'
+});
 
 exports.Prisma.UserScalarFieldEnum = makeEnum({
   id: 'id',
@@ -158,6 +165,11 @@ exports.Prisma.SortOrder = makeEnum({
 exports.Prisma.QueryMode = makeEnum({
   default: 'default',
   insensitive: 'insensitive'
+});
+
+exports.Prisma.NullsOrder = makeEnum({
+  first: 'first',
+  last: 'last'
 });
 
 
