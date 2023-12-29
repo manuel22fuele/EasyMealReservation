@@ -30,5 +30,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   })
 
 })
-
-app.listen(process.env.PORT, () => console.log('Servidor online!!!!'))
+let PORT = 3333
+app.listen(PORT, () => console.log('Servidor online!!!!'))
