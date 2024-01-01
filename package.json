@@ -8,7 +8,7 @@
     "postinstall": "yarn prisma:generate",
     "start": "node ./build/server.js",
     "dev": "ts-node-dev src/server.ts",
-    "build": "babel src --extensions \".js,.ts\" --out-dir build --copy-files",
+    "build": "tsc",
     "prisma:migrate": "prisma migrate dev --schema=./src/config/prisma/schema.prisma",
     "prisma:generate": "prisma generate --schema=./src/config/prisma/schema.prisma",
     "prisma:deploy": "npx prisma migrate deploy --schema=./src/config/prisma/schema.prisma"
