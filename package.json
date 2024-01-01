@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "18.18.0"
+  },
   "scripts": {
     "postinstall": "yarn prisma:generate",
     "start": "node ./build/server.js",
@@ -27,7 +30,6 @@
   },
   "dependencies": {
     "@prisma/client": "^3.9.2",
-    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
