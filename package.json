@@ -8,8 +8,9 @@
   },
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "postinstall": "tsc",
-    "start": "prisma generate && node ./build/server.js",
+    "postinstall": "prisma generate",
+    "start": "node ./build/server.js",
+    "build": "tsc",
     "production": "yarn start",
     "prisma:migrate": "prisma migrate deploy"
   },
