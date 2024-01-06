@@ -27,7 +27,6 @@ model User {
 
 model Book{
   id String @id @default(uuid())
-  name String
   number_people Int
   
   date DateTime
