@@ -22,11 +22,17 @@ class ListBookService{
                 select:{
                     hour:true
                 }
+             },
+             dates:{
+                select:{
+                    date:true
+                }
              }
             }
         })
 
         const camposExtraidos = ListBook.map((livro) => ({
+            date:livro.dates.date,
             hour: livro.hours.hour,
             name: livro.user.name, // Use encadeamento opcional caso 'users' seja indefinido
             table: {

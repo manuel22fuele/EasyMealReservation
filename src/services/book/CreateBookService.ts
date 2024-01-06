@@ -10,7 +10,6 @@ interface BookRequest {
 
 class CreateBookService {
   async execute({
-   
     date_id,
     user_id,
     table_id,
