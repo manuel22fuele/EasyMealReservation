@@ -9,7 +9,7 @@ class CreateBookController{
         const createBookService = new CreateBookService()
 
         const CreateBook = await createBookService.execute({
-            date_id
+            date_id,
             user_id,
             table_id,
             hour_id,
