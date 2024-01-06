@@ -2,7 +2,7 @@ import { parse } from "dotenv";
 import prismaClient from "../../prisma";
 
 interface BookRequest {
-  date: string;
+  date_id: string;
   user_id: string;
   table_id: string;
   hour_id: string;
@@ -11,7 +11,7 @@ interface BookRequest {
 class CreateBookService {
   async execute({
    
-    date,
+    date_id,
     user_id,
     table_id,
     hour_id,
@@ -32,7 +32,7 @@ class CreateBookService {
     const createBook = await prismaClient.book.create({
       data:{
         user_id:user_id,
-        date:date,
+        date_id:date_id,
         hour_id:hour_id,
         table_id:table_id
       }

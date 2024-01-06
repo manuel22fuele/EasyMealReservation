@@ -27,7 +27,6 @@ model User {
 
 model Book{
   id String @id @default(uuid())
-  date DateTime
   
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
@@ -35,12 +34,14 @@ model Book{
   user User @relation(fields: [user_id], references: [id])
   tables Table @relation(fields: [table_id], references: [id])
   hours Hour @relation(fields: [hour_id], references: [id])
+  dates Date @relation(fields: [date_id],references: [id])
   
   
   @@map("books")
   user_id String
   table_id String
   hour_id String
+  date_id String
 
 } 
 model Table{
@@ -64,5 +65,17 @@ model Hour{
 
   books Book[]
   @@map("hours")
+
+} 
+
+model Date{
+  id String @id @default(uuid())
+  date String
+  
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  books Book[]
+  @@map("dates")
 
 } 

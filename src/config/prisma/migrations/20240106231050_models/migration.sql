@@ -14,12 +14,12 @@ CREATE TABLE "users" (
 -- CreateTable
 CREATE TABLE "books" (
     "id" TEXT NOT NULL,
-    "date" TIMESTAMP(3) NOT NULL,
     "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "user_id" TEXT NOT NULL,
     "table_id" TEXT NOT NULL,
     "hour_id" TEXT NOT NULL,
+    "date_id" TEXT NOT NULL,
 
     CONSTRAINT "books_pkey" PRIMARY KEY ("id")
 );
@@ -45,6 +45,16 @@ CREATE TABLE "hours" (
     CONSTRAINT "hours_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "dates" (
+    "id" TEXT NOT NULL,
+    "date" TEXT NOT NULL,
+    "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "dates_pkey" PRIMARY KEY ("id")
+);
+
 -- AddForeignKey
 ALTER TABLE "books" ADD CONSTRAINT "books_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -53,3 +63,6 @@ ALTER TABLE "books" ADD CONSTRAINT "books_table_id_fkey" FOREIGN KEY ("table_id"
 
 -- AddForeignKey
 ALTER TABLE "books" ADD CONSTRAINT "books_hour_id_fkey" FOREIGN KEY ("hour_id") REFERENCES "hours"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "books" ADD CONSTRAINT "books_date_id_fkey" FOREIGN KEY ("date_id") REFERENCES "dates"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
