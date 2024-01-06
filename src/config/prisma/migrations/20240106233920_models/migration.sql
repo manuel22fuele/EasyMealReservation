@@ -29,6 +29,7 @@ CREATE TABLE "tables" (
     "id" TEXT NOT NULL,
     "number_table" INTEGER NOT NULL,
     "quantity_people" INTEGER NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
 
