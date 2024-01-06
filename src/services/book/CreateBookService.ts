@@ -2,8 +2,6 @@ import { parse } from "dotenv";
 import prismaClient from "../../prisma";
 
 interface BookRequest {
-  name: string;
-  number_people: number;
   date: string;
   user_id: string;
   table_id: string;
@@ -12,7 +10,7 @@ interface BookRequest {
 
 class CreateBookService {
   async execute({
-    number_people,
+   
     date,
     user_id,
     table_id,
@@ -43,8 +41,7 @@ class CreateBookService {
     // Creating a new book entry
     const createBook = await prismaClient.book.create({
       data: {
-        name: user.name, // Assuming you want to set the book's name based on the user's name
-        number_people: number_people,
+
         date: date,
         user_id: user_id,
         table_id: table_id ,
