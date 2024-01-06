@@ -27,8 +27,6 @@ model User {
 
 model Book{
   id String @id @default(uuid())
-  number_people Int
-  
   date DateTime
   
   created_at DateTime? @default(now())

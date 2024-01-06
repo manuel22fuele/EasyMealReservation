@@ -14,7 +14,6 @@ CREATE TABLE "users" (
 -- CreateTable
 CREATE TABLE "books" (
     "id" TEXT NOT NULL,
-    "number_people" INTEGER NOT NULL,
     "date" TIMESTAMP(3) NOT NULL,
     "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,

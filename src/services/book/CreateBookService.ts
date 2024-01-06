@@ -27,26 +27,15 @@ class CreateBookService {
       throw new Error("Reservation already exists.");
     }
 
-    // Fetching user details
-    const user = await prismaClient.user.findUnique({
-      where: {
-        id: user_id,
-      },
-      select: {
-        name: true,
-      },
-    });
-
       
     // Creating a new book entry
     const createBook = await prismaClient.book.create({
-      data: {
-
-        date: date,
-        user_id: user_id,
-        table_id: table_id ,
-        hour_id: hour_id,
-      },
+      data:{
+        user_id:user_id,
+        date:date,
+        hour_id:hour_id,
+        table_id:table_id
+      }
     });
 
     return createBook;
