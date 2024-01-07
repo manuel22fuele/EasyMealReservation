@@ -6,8 +6,8 @@ class ListTableService{
           select:{
             id:true,
             quantity_people:true,
-            number_table:true
-
+            number_table:true,
+            status:true
           }
         })
           return ListTable;  
