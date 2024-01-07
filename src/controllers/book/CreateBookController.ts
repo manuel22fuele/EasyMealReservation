@@ -17,7 +17,7 @@ class CreateBookController{
             hour_id,
         })
 
-        const UpdateStatus = await updateTableStatus.execute(table_id)
+        const UpdateStatus = await updateTableStatus.execute({table_id})
 
         return res.json(CreateBook)
     } 
