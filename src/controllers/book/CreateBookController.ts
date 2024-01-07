@@ -10,6 +10,8 @@ class CreateBookController{
         const updateTableStatus = new UpdateTableStatus();
         const createBookService = new CreateBookService()
 
+        const UpdateStatus = await updateTableStatus.execute({table_id})
+        
         const CreateBook = await createBookService.execute({
             date_id,
             user_id,
@@ -17,7 +19,7 @@ class CreateBookController{
             hour_id,
         })
 
-        const UpdateStatus = await updateTableStatus.execute({table_id})
+        
 
         return res.json(CreateBook)
     } 
