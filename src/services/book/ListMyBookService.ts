@@ -8,7 +8,7 @@ class ListMyBookService {
   async execute({ user_id }: UserRequest) {
     const listBook = await prismaClient.book.findFirst({
       where: {
-        user_id: user_id,
+        user_id: user_id
       },
       include: {
         user: {
