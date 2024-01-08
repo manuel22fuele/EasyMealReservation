@@ -6,9 +6,9 @@ interface UserRequest {
 
 class ListMyBookService {
   async execute({ user_id }: UserRequest) {
-    const listBook = await prismaClient.book.findUnique({
+    const listBook = await prismaClient.book.findFirst({
       where: {
-        id: user_id,
+        user_id: user_id,
       },
     
     });
