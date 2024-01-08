@@ -6,8 +6,8 @@ class ListMyBookController{
     async handle(req: Request, res: Response){
 
         const user_id = req.params.user_id as string
-        const listBookController = new ListMyBookService();
-        const ListBook = await listBookController.execute({user_id})
+        const listMyBookController = new ListMyBookService();
+        const ListBook = await listMyBookController.execute({user_id})
 
         return res.json(ListBook)
     }
