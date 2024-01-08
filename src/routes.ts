@@ -30,7 +30,7 @@ const router = Router();
 //-- ROTAS USER --
 router.post('/users', new CreateUserController().handle)
 router.post('/session', new AuthUserController().handle)
-router.put('/profile', isAuthenticated,  new UpdateUserController().handle )
+router.put('/profile/:id', isAuthenticated,  new UpdateUserController().handle )
 
 router.get('/me', isAuthenticated,  new DetailuserController().handle )
 
