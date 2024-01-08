@@ -6,7 +6,7 @@ interface UserRequest {
 
 class ListMyBookService {
   async execute({ user_id }: UserRequest) {
-    const listBook = await prismaClient.book.findFirst({
+    const listBook = await prismaClient.book.findMany({
       where: {
         user_id: user_id
       },
