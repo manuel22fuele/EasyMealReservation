@@ -1,38 +1,35 @@
-import prismaClient from '../../prisma'
+import prismaClient from '../../prisma';
 
-
-interface UserRequest{
+interface UserRequest {
   name: string;
   email: string;
   password: string;
   phone: string;
-  user_id: string
+  user_id: string;
 }
 
-class UpdateUserService{
-  async execute({ name, phone, email, password, user_id }: UserRequest){
-    const user = await prismaClient.user.update({
-        where:{
-            id: user_id
-        },
-      data:{
-        name: name,
-        email: email,
-        password: password,
-        phone: phone,
-
+class UpdateUserService {
+  async execute({ name, phone, email, password, user_id }: UserRequest) {
+    const updatedUser = await prismaClient.user.update({
+      where: {
+        id: user_id,
       },
-      select:{
+      data: {
+        name,
+        email,
+        password,
+        phone,
+      },
+      select: {
         id: true,
-        name: true,       
+        name: true,
         email: true,
         phone: true,
-      }
-    })
+      },
+    });
 
-
-    return user;
+    return updatedUser;
   }
 }
 
-export { UpdateUserService }
+export { UpdateUserService };
