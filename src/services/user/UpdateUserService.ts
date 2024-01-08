@@ -13,7 +13,7 @@ class UpdateUserService{
   async execute({ name, phone, email, password, user_id }: UserRequest){
     const user = await prismaClient.user.update({
         where:{
-            id: user_id,
+            id: user_id
         },
       data:{
         name: name,
