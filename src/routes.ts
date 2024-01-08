@@ -20,6 +20,7 @@ import { DeleteDateController } from './controllers/Date/DeleteDateController';
 import { CreateBookController } from './controllers/book/CreateBookController';
 import { ListBookController } from './controllers/book/ListBookController';
 import { DeleteBookController } from './controllers/book/DeleteBookController';
+import { ListMyBookController } from './controllers/book/ListMyBookController';
 
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
@@ -51,6 +52,7 @@ router.delete('/table', isAuthenticated, new DeleteTableController().handle )
 router.post('/book', isAuthenticated, new CreateBookController().handle )
 router.get('/book', isAuthenticated, new ListBookController().handle )
 router.delete('/book', isAuthenticated, new DeleteBookController().handle )
+router.get('/book', isAuthenticated, new ListMyBookController().handle )
 
 
 export { router }; 
