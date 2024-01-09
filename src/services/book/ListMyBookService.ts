@@ -5,7 +5,7 @@ interface MyBookRequest{
 }
 class ListMyBookService {
   async execute({user_id }: MyBookRequest ) {
-    const listBook = await prismaClient.book.findMany({
+    const listMyBook = await prismaClient.book.findMany({
       where: {
         user_id: user_id
       },
@@ -34,7 +34,7 @@ class ListMyBookService {
       },
     });
 
-    return listBook;
+    return listMyBook;
   }
 }
 
