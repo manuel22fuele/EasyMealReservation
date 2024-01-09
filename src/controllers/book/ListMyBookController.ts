@@ -7,7 +7,7 @@ class ListMyBookController{
 
         const user_id = req.user_id 
         const listMyBookController = new ListMyBookService();
-        const ListMyBook = await listMyBookController.execute(user_id)
+        const ListMyBook = await listMyBookController.execute({user_id})
 
         return res.json(ListMyBook)
     }

@@ -1,9 +1,11 @@
 import prismaClient from "../../prisma";
 
-
+interface MyBookRequest{
+  user_id: string
+}
 class ListMyBookService {
-  async execute(user_id : string) {
-    const listBook = await prismaClient.book.findFirst({
+  async execute({user_id }: MyBookRequest ) {
+    const listBook = await prismaClient.book.findMany({
       where: {
         user_id: user_id
       },
