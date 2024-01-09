@@ -25,11 +25,18 @@ class CreateBookService {
       where:{
         hour_id:hour_id
       }
+      
+    })
+
+    const checkIdDateIsTheSame = await prismaClient.book.findFirst({
+        where:{
+          date_id:date_id
+        }
     })
     
-    if (checkIfBookAlreadyExists && checkIfDateAlreadyExists) {
+    if (checkIfBookAlreadyExists && checkIfDateAlreadyExists || checkIfBookAlreadyExists && checkIdDateIsTheSame) {
       throw new Error("Reservation already exists.");
-    }
+    } 
 
       
     // Creating a new book entry
