@@ -11,7 +11,7 @@ class CreateBookController{
         const updateTableStatus = new UpdateTableStatus();
         const createBookService = new CreateBookService()
 
-        await transporter.sendMail(mailOptions)
+        
 
         const UpdateStatus = await updateTableStatus.execute({table_id})
     
